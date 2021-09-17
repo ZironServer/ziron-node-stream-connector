@@ -1,0 +1,39 @@
+{
+  "name": "ziron-node-stream-connector",
+  "description": "Connector to connect Ziron Read/WriteStream to native Node.js streams.",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZironServer/ziron-node-stream-connector.git"
+  },
+  "author": {
+    "name": "Luca Scaringella",
+    "email": "lucacode1@gmail.com",
+    "url": "https://luca.scaringella.de"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "dependencies": {
+    "@types/node": "^16.9.1",
+    "ziron-engine": "^0.4.3"
+  },
+  "devDependencies": {
+    "typescript": "^3.7.5"
+  },
+  "scripts": {
+    "build": "rm -rf dist/ && tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "ziron",
+    "protocol",
+    "communicator",
+    "core",
+    "fast",
+    "lightway"
+  ]
+}
