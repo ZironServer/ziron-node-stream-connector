@@ -10,14 +10,14 @@
     "removeComments": true,
     "noImplicitAny": false,
     "declaration": true,
-    "outDir": "../zation-core-events/dist",
+    "outDir": "./dist",
     "strict": true
   },
   "include": [
     "src/**/*"
   ],
   "exclude": [
-    "../zation-core-events/node_modules",
+    "node_modules",
     "dist"
   ]
 }
