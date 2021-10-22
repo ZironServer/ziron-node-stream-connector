@@ -1,7 +1,7 @@
 {
   "name": "ziron-node-stream-connector",
   "description": "Connector to connect Ziron Read/WriteStream to native Node.js streams.",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "UNLICENSED",
