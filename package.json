@@ -19,7 +19,7 @@
   ],
   "dependencies": {
     "@types/node": "^16.9.1",
-    "ziron-engine": "^0.5.0"
+    "ziron-engine": "^0.6.0"
   },
   "devDependencies": {
     "typescript": "^3.7.5"
