@@ -34,6 +34,9 @@
     "communicator",
     "core",
     "fast",
-    "lightway"
+    "lightway",
+    "streams",
+    "connector",
+    "node.js"
   ]
 }
