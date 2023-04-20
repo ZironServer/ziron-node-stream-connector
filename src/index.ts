@@ -5,7 +5,7 @@ Copyright(c) Ing. Luca Gian Scaringella
  */
 
 import {Readable, ReadableOptions, Writable, WritableOptions} from "stream";
-import {ReadStream, StreamCloseError, StreamErrorCloseCode, StreamState, WriteStream} from "ziron-engine";
+import {ReadStream, StreamCloseCode, StreamCloseError, StreamState, WriteStream} from "ziron-engine";
 
 type ToReadableOptions = Pick<ReadableOptions,'highWaterMark' | 'encoding'>;
 type ToWriteableOptions = Pick<WritableOptions,'highWaterMark'>;
@@ -43,15 +43,15 @@ ReadStream.prototype.toReadable = function toReadable(options: ToReadableOptions
         async read() {
             const res = await stream.read();
             if(res === null) {
-                if(stream.errorCode != null)
-                    this.destroy(new StreamCloseError(stream.errorCode));
+                if(stream.closeCode !== StreamCloseCode.End)
+                    this.destroy(new StreamCloseError(stream.closeCode!));
                 else this.push(null);
             }
             else this.push(binary ? new Uint8Array(res as ArrayBuffer) : res);
         },
         destroy(error, callback) {
             if(stream.state !== StreamState.Closed)
-                stream.close(StreamErrorCloseCode.Abort);
+                stream.close(StreamCloseCode.Abort);
             callback(error);
         }
     });
@@ -74,14 +74,14 @@ WriteStream.prototype.toWriteable = function toWriteable(options: ToWriteableOpt
                 .catch(callback)
                 .then((res) => {
                     if(res) callback();
-                    else callback(stream.errorCode != null ?
-                        new StreamCloseError(stream.errorCode) :
+                    else callback(stream.closeCode != null ?
+                        new StreamCloseError(stream.closeCode) :
                         new Error("WriteStream is not open."))
                 });
         },
         destroy(error, callback) {
             if(stream.state !== StreamState.Closed)
-                stream.close(StreamErrorCloseCode.Abort);
+                stream.close(StreamCloseCode.Abort);
             callback(error);
         },
         final(callback: (error?: (Error | null)) => void) {
